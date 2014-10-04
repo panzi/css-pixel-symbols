@@ -65,6 +65,10 @@ var CSSPixelSymbols = (function () {
 				CSSPixelSymbols.save();
 			});
 
+			observe(document.getElementById('save-image-button'), 'click', function (event) {
+				CSSPixelSymbols.saveImage();
+			});
+
 			observe(document.getElementById('open-button'), 'change', fileChanged);
 			observe(document.getElementById('class-name'), 'change', classChanged);
 			observe(document.getElementById('symbol-class-name'), 'change', classChanged);
@@ -317,7 +321,7 @@ var CSSPixelSymbols = (function () {
 			var url = URL.createObjectURL(data);
 			var link = document.createElement('a');
 			link.href = url;
-			link.setAttribute("download",(json['symbol-class-name']||"css-pixel-symbol-example")+".json");
+			link.setAttribute("download",(json['symbol-class-name']||json["css-pixel-symbol-example"])+".json");
 			link.style.visibility = 'hidden';
 			link.style.position = 'absolute';
 			document.body.appendChild(link);
@@ -325,6 +329,38 @@ var CSSPixelSymbols = (function () {
 			setTimeout(function () {
 				document.body.removeChild(link);
 				URL.revokeObjectURL(url);
+			}, 0);
+		},
+		saveImage: function () {
+			var canvas = document.createElement("canvas");
+			canvas.width  = 16;
+			canvas.height = 16;
+			var ctx = canvas.getContext("2d");
+			ctx.fillStyle = 'rgba(255,255,255,0)';
+			ctx.fillRect(0, 0, 16, 16);
+
+			ctx.fillStyle = 'rgba(0,0,0,1)';
+			for (var y = 0; y < 16; ++ y) {
+				var row = symbol[y];
+				for (var x = 0; x < 16; ++ x) {
+					if (row[x]) {
+						ctx.fillRect(x, y, 1, 1);
+					}
+				}
+			}
+
+			var className    = document.getElementById('class-name').value;
+			var symClassName = document.getElementById('symbol-class-name').value;
+			var url = canvas.toDataURL("image/png");
+			var link = document.createElement('a');
+			link.href = url;
+			link.setAttribute("download",(symClassName||className)+".png");
+			link.style.visibility = 'hidden';
+			link.style.position = 'absolute';
+			document.body.appendChild(link);
+			link.click();
+			setTimeout(function () {
+				document.body.removeChild(link);
 			}, 0);
 		},
 		load: function (data) {
