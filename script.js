@@ -57,6 +57,10 @@ var CSSPixelSymbols = (function () {
 				CSSPixelSymbols.clear();
 			});
 
+			observe(document.getElementById('invert-button'), 'click', function (event) {
+				CSSPixelSymbols.invert();
+			});
+
 			observe(document.getElementById('save-button'), 'click', function (event) {
 				CSSPixelSymbols.save();
 			});
@@ -157,6 +161,17 @@ var CSSPixelSymbols = (function () {
 			var isset = (symbol[y][x] = !symbol[y][x]);
 			document.getElementById('symbol-edit-cell-'+x+'-'+y).className =
 				isset ? 'css-pixel-symbol-pixel-set' : '';
+			this.updateStyle();
+		},
+		invert: function () {
+			for (var y = 0; y < symbol.length; ++ y) {
+				var row = symbol[y];
+				for (var x = 0; x < row.length; ++ x) {
+					var isset = row[x] = !row[x];
+					document.getElementById('symbol-edit-cell-'+x+'-'+y).className =
+						isset ? 'css-pixel-symbol-pixel-set' : '';
+				}
+			}
 			this.updateStyle();
 		},
 		draw: function (x, y) {
