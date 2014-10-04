@@ -33,7 +33,7 @@ body {
 	appearance: button;
 }
 
-#open-button {
+#controls input[type=file]#open-button {
 	visibility: hidden;
 	width: 0;
 }
