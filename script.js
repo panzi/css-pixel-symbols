@@ -503,16 +503,16 @@ var CSSPixelSymbols = (function () {
 
 	var pushHistoryState = history.pushState ? debounce(function () {
 		var json = CSSPixelSymbols.toJSON();
+		if (json['class-name'] === 'css-pixel-symbol') {
+			delete json['class-name'];
+		}
+		if (json['symbol-class-name'] === 'css-pixel-symbol-example') {
+			delete json['symbol-class-name'];
+		}
+		if (json.symbol === 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=') {
+			delete json.symbol;
+		}
 		if (!sameState(json, history.state||{})) {
-			if (json['class-name'] === 'css-pixel-symbol') {
-				delete json['class-name'];
-			}
-			if (json['symbol-class-name'] === 'css-pixel-symbol-example') {
-				delete json['symbol-class-name'];
-			}
-			if (json.symbol === 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=') {
-				delete json.symbol;
-			}
 			if (isEmpty(json)) {
 				if (location.search.replace(/^\?/,'')) {
 					history.pushState(json, null, location.pathname);
