@@ -232,10 +232,10 @@ var CSSPixelSymbols = (function () {
 			this.updateStyle();
 		},
 		updateStyle: function () {
-			var className    = document.getElementById('class-name').value;
-			var symClassName = document.getElementById('symbol-class-name').value;
+			var className    = document.getElementById('class-name').value.trim();
+			var symClassName = document.getElementById('symbol-class-name').value.trim();
 			var css = [
-				'.'+className+' {',
+				'.'+escapeCSS(className)+' {',
 				'\tdisplay: inline-block;',
 				'\twidth: 1em;',
 				'\theight: 1em;',
@@ -258,7 +258,7 @@ var CSSPixelSymbols = (function () {
 			boxes = boxes.join(', ');
 			
 			css.push(
-				'.'+className+'.'+symClassName+':after {',
+				'.'+escapeCSS(className)+'.'+escapeCSS(symClassName)+':after {',
 				'\tdisplay:inline-block;',
 				'\tposition:relative;',
 				'\ttop:-0.9em;',
@@ -494,6 +494,13 @@ var CSSPixelSymbols = (function () {
 
 	function cssFloat (value) {
 		return value.toFixed(20).replace(/\.(([0-9]*[^0])0*|(0)0*)$/,'.$2$3');
+	}
+
+	function escapeCSS (s) {
+		return s.replace(/[^-\w]/g, function (ch) {
+			var hex = ch.charCodeAt(0).toString(16);
+			return '\\'+new Array(7-hex.length).join('0')+hex;
+		});
 	}
 
 	function drawer (x, y) {
