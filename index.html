@@ -119,7 +119,76 @@
 <table id="symbol-edit"></table>
 </div>
 
-<p id="testout">test <span id="symbol"></span> test</p>
+<p>Preview:</p>
+
+<form action="javascript;" onsubmit="return false;" id="preview-style">
+
+<input type="color" id="color" value="#000000"/>
+
+<select id="font-family">
+<option value="sans-serif" selected>Sans-Serif</option>
+<option value="serif">Serif</option>
+<option value="fantasy">Fantasy</option>
+<option value="cursive">Cursive</option>
+<option value="monospace">Monospace</option>
+</select>
+
+<select id="font-weight">
+<option value="100">Thin</option>
+<option value="200">Extra-Light</option>
+<option value="300">Light</option>
+<option value="400" selected>Normal</option>
+<option value="500">Medium</option>
+<option value="600">Semi-Bold</option>
+<option value="700">Bold</option>
+<option value="800">Extra-Bold</option>
+<option value="900">Ultra-Bold</option>
+</select>
+
+<select id="font-style">
+<option value="normal" selected>Normal</option>
+<option value="italic">Italic</option>
+<option value="oblique">Oblique</option>
+</select>
+
+<select id="text-align">
+<option value="left">Left</option>
+<option value="center" selected>Center</option>
+<option value="right">Right</option>
+<option value="justify">Justify</option>
+</select>
+
+<input id="font-size" type="number" min="1" value="16"/>
+
+<select id="font-size-unit">
+<optgroup label="Relative length units">
+<option value="em">em</option>
+<option value="ex">ex</option>
+<option value="ch">ch</option>
+<option value="rem">rem</option>
+</optgroup>
+
+<optgroup label="Absolute length units">
+<option value="px" selected>px</option>
+<option value="mm">mm</option>
+<option value="cm">cm</option>
+<option value="in">in</option>
+<option value="pt">pt</option>
+<option value="pc">pc</option>
+</optgroup>
+
+<optgroup label="Viewport-percentage lengths">
+<option value="vh">vh</option>
+<option value="vw">vw</option>
+<option value="vmin">vmin</option>
+<option value="vmax">vmax</option>
+</optgroup>
+</select>
+
+</form>
+
+<p style="color:#000000;font-family:sans-serif;font-size:16px;font-weight:400;font-style:normal;text-align:center;"
+	id="preview">test <span id="symbol"></span> test</p>
 
 <p>
 <label for="style-out">CSS:</label><br/>

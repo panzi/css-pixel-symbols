@@ -145,6 +145,48 @@ var CSSPixelSymbols = (function () {
 				}
 			});
 
+			observe(document.getElementById("preview-style"), 'submit', function (event) {
+				var preview = document.getElementById("preview");
+				preview.style.color      = document.getElementById("color").value;
+				preview.style.fontFamily = document.getElementById("font-family").value;
+				preview.style.fontWeight = document.getElementById("font-weight").value;
+				preview.style.fontStyle  = document.getElementById("font-style").value;
+				preview.style.textAlign  = document.getElementById("text-align").value;
+				preview.style.fontSize   = document.getElementById("font-size").value +
+				                           document.getElementById("font-size-unit").value;
+			});
+
+			observe(document.getElementById("color"), 'change', function (event) {
+				document.getElementById("preview").style.color = this.value;
+			});
+
+			observe(document.getElementById("font-family"), 'change', function (event) {
+				document.getElementById("preview").style.fontFamily = this.value;
+			});
+
+			observe(document.getElementById("font-weight"), 'change', function (event) {
+				document.getElementById("preview").style.fontWeight = this.value;
+			});
+
+			observe(document.getElementById("font-style"), 'change', function (event) {
+				document.getElementById("preview").style.fontStyle = this.value;
+			});
+
+			observe(document.getElementById("text-align"), 'change', function (event) {
+				document.getElementById("preview").style.textAlign = this.value;
+			});
+
+			observe(document.getElementById("font-size"), 'change', function (event) {
+				document.getElementById("preview").style.fontSize =
+					this.value + document.getElementById("font-size-unit").value;
+			});
+
+			observe(document.getElementById("font-size-unit"), 'change', function (event) {
+				document.getElementById("preview").style.fontSize =
+					document.getElementById("font-size").value + this.value;
+			});
+
+
 			this.load(parseParams(location.search.replace(/^\?/,'')));
 		},
 		clear: function () {
@@ -204,7 +246,7 @@ var CSSPixelSymbols = (function () {
 				var row = symbol[y];
 				for (var x = 0; x < row.length; ++ x) {
 					if (row[x]) {
-						boxes.push((pix*x)+'em '+(pix+pix*y)+'em currentcolor');
+						boxes.push(cssFloat(pix*x)+'em '+cssFloat(pix+pix*y)+'em currentcolor');
 					}
 				}
 			}
@@ -399,7 +441,7 @@ var CSSPixelSymbols = (function () {
 								var g = data[off + 1];
 								var b = data[off + 2];
 								var a = data[off + 3];
-								ctx.fillStyle = 'rgba('+r+','+g+','+b+','+(a/255).toFixed()+')';
+								ctx.fillStyle = 'rgba('+r+','+g+','+b+','+cssFloat(a/255)+')';
 								ctx.fillRect(pixw * x, pixh * y, pixw, pixh);
 							}
 						}
@@ -413,6 +455,10 @@ var CSSPixelSymbols = (function () {
 			}
 		}
 	};
+
+	function cssFloat (value) {
+		return value.toFixed(20).replace(/\.(([0-9]*[^0])0*|(0)0*)$/,'.$2$3');
+	}
 
 	function drawer (x, y) {
 		return function (event) {

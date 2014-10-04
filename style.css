@@ -72,10 +72,10 @@ textarea {
 	text-align: left;
 }
 
-input[type=text],
-input[type=url],
-input[type=file],
-select {
+#controls input[type=text],
+#controls input[type=url],
+#controls input[type=file],
+#controls select {
 	width: 270px;
 }
 
@@ -96,4 +96,12 @@ select {
 .use-bg-image-file #bg-image-placeholder-row,
 .use-bg-image-url  #bg-image-placeholder-row {
 	display: none;
+}
+
+#font-size {
+	width: 3em;
+}
+
+input[type=number] {
+	text-align: right;
 }
