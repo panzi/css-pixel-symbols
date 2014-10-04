@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>CSS Pixel Symbols</title>
+<link href="style.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="bitfield.js"></script>
+<script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+
+<div>
+<table id="controls">
+<tr>
+<td><label for="class-name">General class name:</label></td>
+<td><input type="text" id="class-name" value="css-pixel-symbol"/></td>
+</tr>
+
+<tr>
+<td><label for="symbol-class-name">Symbol class name:</label></td>
+<td><input type="text" id="symbol-class-name" value="css-pixel-symbol-example"/></td>
+</tr>
+
+<tr>
+<td><label for="examples">Examples:</label></td>
+<td><select id="examples">
+<option value="" selected></option>
+<option value="AADAA/AP+B+cJwwDzDPOc55n/n/+f/5//n92bmJGAAA=">Ghost (Pacman)</option>
+<option value="4AeYH4Qnwk9iWD/wM/AhsGGY85//v05yRCIEIAgQ8A8=">One Up (Mario)</option>
+</select></td>
+</tr>
+
+<tr>
+<td><label>Background image:</label></td>
+<td>
+<select id="bg-image-kind">
+<option value="none" selected>None</option>
+<option value="url">Image Link</option>
+<option value="file">Local File</option>
+</select>
+</td>
+</tr>
+
+<tr id="bg-image-file-row">
+<td></td>
+<td><input type="file" id="bg-image-file"/></td>
+</tr>
+
+<tr id="bg-image-url-row">
+<td></td>
+<td><input type="url" id="bg-image-url" placeholder="http://example.com/image.png"/></td>
+</tr>
+
+<tr id="bg-image-placeholder-row">
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td colspan="2" class="buttons">
+<label class="button" for="open-button">Open</label>
+<input type="file" id="open-button"/>
+<button type="button" id="save-button">Save</button>
+<button type="button" id="clear-button">Clear</button>
+</td>
+</tr>
+</table>
+</div>
+
+<div id="symbol-edit-wrapper">
+<table id="symbol-edit"></table>
+</div>
+
+<p id="testout">test <span id="symbol"></span> test</p>
+
+<p>
+<label for="style-out">CSS:</label><br/>
+<textarea id="style-out" readonly onclick="this.select();"></textarea>
+</p>
+
+<p>
+<label for="html-out">HTML:</label><br/>
+<textarea id="html-out" readonly onclick="this.select();"></textarea>
+</p>
+
+<script type="text/javascript">
+CSSPixelSymbols.init();
+</script>
+
+</body>
+</html>
