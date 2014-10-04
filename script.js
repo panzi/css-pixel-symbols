@@ -509,7 +509,7 @@ var CSSPixelSymbols = (function () {
 		if (json['symbol-class-name'] === 'css-pixel-symbol-example') {
 			delete json['symbol-class-name'];
 		}
-		if (json.symbol === 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=') {
+		if (json.symbol === 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA') {
 			delete json.symbol;
 		}
 		if (!sameState(json, history.state||{})) {
